@@ -1,0 +1,49 @@
+<div class="ui-g">
+    <p-toast></p-toast>
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-panel header="Administrador de Mascotas" [style]="{width:'70%',margin:'0 auto'}">
+        <div style="margin-bottom: 20px;">
+            <p-menubar [model]="items"></p-menubar>
+        </div>
+        <p-table dataKey="id" [value]="mascotas" [responsive]="true" [columns]="cols" [paginator]="true" [rows]="5" styleClass="p-datatable-sm p-datatable-gridlines" selectionMode="single" [(selection)]="selectMascota">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{ col.header }}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-mascota let-columns="columns">
+                <tr [pSelectableRow]="mascota">
+                    <td *ngFor="let col of columns">
+                        {{ mascota[col.field] }}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+    <p-dialog [(visible)]="mascotaDialog" [responsive]="true" [style]="{width:'400px'}" header="Detalles de la Mascota" [modal]="true">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="id">ID</label>
+                <input id="id" type="text" pInputText [(ngModel)]="mascota.id">
+            </div>
+            <div class="p-field">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" pInputText [(ngModel)]="mascota.nombre">
+            </div>
+            <div class="p-field">
+                <label for="raza">Raza</label>
+                <input id="raza" type="text" pInputText [(ngModel)]="mascota.raza">
+            </div>
+            <div class="p-field">
+                <label for="edad">Edad</label>
+                <input id="lasedadtname1" type="number" pInputText [(ngModel)]="mascota.edad">
+            </div>
+        </div>
+        <p-footer>
+            <p-button label="Guardar" (click)="postMascota()"></p-button>
+        </p-footer>
+    </p-dialog>
+</div>

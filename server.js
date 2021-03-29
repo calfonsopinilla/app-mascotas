@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.static(__dirname+'/dist/mascotas-app'));
 app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+'/dist/mascotas-app/index.html'));
+    res.sendFile(`./dist/index.hmtl`);
 });
 
 app.listen(process.env.PORT || 8080);
